@@ -42,7 +42,7 @@ def load_dataset() -> pd.DataFrame:
     try:
         BASE_DIR = os.path.dirname(__file__)
         DATA_PATH = os.path.join(BASE_DIR, '..', 'data', 'data.csv')
-        df = pd.read_csv("../data/data.csv", encoding='utf-8')
+        df = pd.read_csv(DATA_PATH, encoding='utf-8')
         df.columns = df.columns.str.strip()
         return df
     except FileNotFoundError as e:
