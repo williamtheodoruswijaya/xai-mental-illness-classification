@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import re
 import string
 import requests
+from wordcloud import WordCloud
 
 # Back-end
 CLASS_NAMES = [
@@ -60,7 +61,29 @@ if df is not None and not df.empty:
         st.write(f"**Dimensi Data:** {df.shape[0]} baris, {df.shape[1]} kolom")
 
 with st.expander("📈 Analisis Data Eksplorasi (EDA)"):
-    st.markdown("#### ✏️ On Progress")
+    st.markdown("#### 📊 Distribusi Label Kondisi Mental")
+    if 'status' in df.columns:
+        fig, ax = plt.subplots(figsize=(10, 5))
+        sns.countplot(y='status', data=df, order=df['status'].value_counts().index, ax=ax, palette="Set2")
+        ax.set_title("Distribusi Kelas")
+        ax.set_xlabel("Jumlah")
+        ax.set_ylabel("Status")
+        st.pyplot(fig)
+    else:
+        st.warning("Kolom 'status' tidak ditemukan pada dataset.")
+
+    st.markdown("#### ☁️ WordCloud per Label (opsional)")
+    selected_label = st.selectbox("Pilih label untuk melihat WordCloud", sorted(df['status'].unique()))
+    if selected_label:
+        label_texts = df[df['status'] == selected_label]['text'].dropna().astype(str)
+        combined_text = ' '.join(label_texts)
+        wordcloud = WordCloud(width=800, height=400, background_color='white', colormap='plasma').generate(combined_text)
+        
+        fig_wc, ax_wc = plt.subplots(figsize=(10, 5))
+        ax_wc.imshow(wordcloud, interpolation='bilinear')
+        ax_wc.axis('off')
+        ax_wc.set_title(f'WordCloud untuk Label: {selected_label}', fontsize=16)
+        st.pyplot(fig_wc)
 
 st.markdown("---")
 
