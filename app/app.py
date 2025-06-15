@@ -43,7 +43,7 @@ def load_dataset() -> pd.DataFrame:
         st.error(f"❌ Error loading datasets: {str(e)}")
         return pd.DataFrame()
 
-@st.cache_resource
+@st.cache_resource(show_spinner="Loading model and vectorizer (this might take a while)...")
 def load_assets():
     try:
         model = joblib.load('../models/voting_classifier.pkl')
@@ -59,7 +59,7 @@ df = load_dataset()
 CLASS_NAMES = ['Normal', 'Depression', 'Suicidal', 'Anxiety', 'Bipolar', 'Stress', 'Personality disorder']
 
 # 1. Menampilkan Dataset dalam bentuk Tabel (di dalam expander)
-if df is not None:
+if df is not None and not df.empty:
     with st.expander("📊 Pratinjau Dataset (data.csv)"):
         st.dataframe(df)
         st.write(f"**Dimensi Data:** {df.shape[0]} baris, {df.shape[1]} kolom")
