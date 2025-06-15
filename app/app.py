@@ -40,9 +40,6 @@ def preprocess_text(text: str) -> str:
 @st.cache_data
 def load_dataset() -> pd.DataFrame:
     try:
-        BASE_DIR = os.path.dirname(__file__)
-        DATA_PATH = os.path.join(BASE_DIR, '..', 'data', 'data.csv')
-        st.write(f"📁 Membaca dataset dari: {DATA_PATH}")
         df = pd.read_csv("../data/data.csv", encoding='utf-8')
         df.columns = df.columns.str.strip()
         return df
