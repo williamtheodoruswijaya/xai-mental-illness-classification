@@ -84,7 +84,7 @@ with st.expander("📈 Analisis Data Eksplorasi (EDA)"):
     st.markdown("#### ☁️ WordCloud per Label (opsional)")
     selected_label = st.selectbox("Pilih label untuk melihat WordCloud", sorted(df['status'].unique()))
     if selected_label:
-        label_texts = df[df['status'] == selected_label]['text'].dropna().astype(str)
+        label_texts = df[df['status'] == selected_label]['statement'].dropna().astype(str)
         combined_text = ' '.join(label_texts)
         wordcloud = WordCloud(width=800, height=400, background_color='white', colormap='plasma').generate(combined_text)
         
