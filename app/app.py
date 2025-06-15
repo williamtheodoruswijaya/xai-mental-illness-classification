@@ -42,7 +42,9 @@ def load_dataset() -> pd.DataFrame:
     try:
         BASE_DIR = os.path.dirname(__file__)
         DATA_PATH = os.path.join(BASE_DIR, '..', 'data', 'data.csv')
+        st.write(f"📁 Membaca dataset dari: {DATA_PATH}")
         df = pd.read_csv(DATA_PATH)
+        df.columns = df.columns.str.strip()
         return df
     except FileNotFoundError as e:
         st.error(f"❌ Dataset files not found: {str(e)}")
@@ -54,6 +56,10 @@ def load_dataset() -> pd.DataFrame:
         return pd.DataFrame()
 
 df = load_dataset()
+
+# TODO: DEBUGGING (nanti apus)
+st.write("📋 Kolom-kolom dataframe:", df.columns.tolist())
+st.write("🧾 5 baris pertama:", df.head())
 
 st.title("Mental Ilness Classification App")
 st.markdown("Analyze text for emotional content and intensity using machine learning models")
