@@ -54,10 +54,11 @@ def load_dataset() -> pd.DataFrame:
         st.error(f"❌ Error loading datasets: {str(e)}")
         return pd.DataFrame()
 
-df = load_dataset()
 
 st.title("🧠 Mental Ilness Classification App")
 st.markdown("Analyze text for emotional content and intensity using machine learning models")
+
+df = load_dataset()
 
 if df is not None and not df.empty:
     with st.expander("📊 Pratinjau Dataset (data.csv)"):
