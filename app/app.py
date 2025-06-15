@@ -57,11 +57,7 @@ def load_dataset() -> pd.DataFrame:
 
 df = load_dataset()
 
-# TODO: DEBUGGING (nanti apus)
-st.write("📋 Kolom-kolom dataframe:", df.columns.tolist())
-st.write("🧾 5 baris pertama:", df.head())
-
-st.title("Mental Ilness Classification App")
+st.title("🧠 Mental Ilness Classification App")
 st.markdown("Analyze text for emotional content and intensity using machine learning models")
 
 if df is not None and not df.empty:
