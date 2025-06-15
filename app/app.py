@@ -1,8 +1,16 @@
 import streamlit as st
+
+st.set_page_config(
+    page_title="Mental Illness Classification App",
+    page_icon="🧠",
+    layout="wide"
+)
+
 import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+import os
 import re
 import string
 import requests
@@ -32,6 +40,8 @@ def preprocess_text(text: str) -> str:
 @st.cache_data
 def load_dataset() -> pd.DataFrame:
     try:
+        BASE_DIR = os.path.dirname(__file__)
+        DATA_PATH = os.path.join(BASE_DIR, '..', 'data', 'data.csv')
         df = pd.read_csv('../data/data.csv')
         return df
     except FileNotFoundError as e:
